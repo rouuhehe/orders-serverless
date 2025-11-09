@@ -12,7 +12,7 @@ provider:
     TABLE_NAME: ${sls:stage}-t_orders
 
 functions:
-  crear:
+  createOrder:
     handler: createOrder.lambda_handler
     events:
       - http:
@@ -21,7 +21,7 @@ functions:
           cors: true
           integration: lambda
 
-  listar:
+  listActiveOrders:
     handler: getActiveOrders.lambda_handler
     events:
       - http:
@@ -30,8 +30,8 @@ functions:
           cors: true
           integration: lambda
 
-  actualizarEstado:
-    handler: changeStatus.lambda_handler
+  updateStatus:
+    handler: updateStatus.lambda_handler
     events:
       - http:
           path: /orders/{tenant_id}/{order_id}/updateStatus
@@ -39,7 +39,7 @@ functions:
           cors: true
           integration: lambda
 
-  cancelar:
+  cancelOrder:
     handler: cancelOrder.lambda_handler
     events:
       - http:
