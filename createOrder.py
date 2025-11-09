@@ -2,7 +2,7 @@ import json, boto3, uuid
 from time import time
 
 def lambda_handler(event, context):
-    body = json.loads(event.get("body", "{}"))
+    body = event["body"]
     tenant_id = event["pathParameters"]["tenant_id"]
 
     order_id = str(uuid.uuid4())

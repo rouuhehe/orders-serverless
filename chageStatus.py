@@ -3,7 +3,7 @@ from time import time
 from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
-    body = json.loads(event.get("body", "{}"))
+    body = event["body"]
     tenant_id = event["pathParameters"]["tenant_id"]
     order_id = event["pathParameters"]["order_id"]
 
