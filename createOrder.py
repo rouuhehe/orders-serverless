@@ -1,15 +1,16 @@
 import json, boto3, uuid
+import os
 from time import time
 
 def lambda_handler(event, context):
     body = event["body"]
     tenant_id = event["pathParameters"]["tenant_id"]
-
+    table_name = os.environ["TABLE_NAME"]
     order_id = str(uuid.uuid4())
     now = str(int(time()))
 
     dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table("t_orders")
+    table = dynamodb.Table(table_name)
 
     order_data = {
         "tenant_id": tenant_id,

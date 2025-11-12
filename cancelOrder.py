@@ -1,12 +1,14 @@
 import json, boto3
+import os
 from time import time
 
 def lambda_handler(event, context):
     tenant_id = event["pathParameters"]["tenant_id"]
     order_id = event["pathParameters"]["order_id"]
+    table_name = os.environ["TABLE_NAME"]
     now = str(int(time()))
 
-    table = boto3.resource("dynamodb").Table("t_orders")
+    table = boto3.resource("dynamodb").Table(table_name)
 
     res = table.update_item(
         Key={"tenant_id": tenant_id, "order_id": order_id},

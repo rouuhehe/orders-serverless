@@ -1,8 +1,10 @@
 import json, boto3
+import os
 
 def lambda_handler(event, context):
     tenant_id = event["pathParameters"]["tenant_id"]
-    table = boto3.resource("dynamodb").Table("t_orders")
+    table_name = os.environ["TABLE_NAME"]
+    table = boto3.resource("dynamodb").Table(table_name)
 
     res = table.query(
         KeyConditionExpression="tenant_id = :t",
